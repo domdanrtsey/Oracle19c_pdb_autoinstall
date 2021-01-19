@@ -8,20 +8,90 @@
 1. **请注意：**本脚本是`pdb`容器数据库的安装部署脚本，如果需要安装非`pdb`容器数据库，请选择`oracle19c_install.sh`脚本（正在编写，后期上传），请注意`pdb`容器数据库在连接上的区别，下面是`plsql`客户端工具的连接事例
 
    ```shell
+   普通用户登录：
    用户名：orcl
    口令：Orcl2021
    数据库：ipaddress:1521/pdbname
+   连接为：Normal
+
+   sys用户登录：
+   用户名：orcl
+   口令：Orcl2021
+   数据库：ipaddress:1521/pdbname
+   连接为：SYSDBA
+
+   sys用户登录：
+   用户名：orcl
+   口令：Orcl2021
+   数据库：ipaddress:1521/ORACLE_SID
+   连接为：SYSDBA
+
+   system用户登录：
+   用户名：orcl
+   口令：Orcl2021
+   数据库：ipaddress:1521/pdbname
+   连接为：Normal
+
+   system用户登录：
+   用户名：orcl
+   口令：Orcl2021
+   数据库：ipaddress:1521/ORACLE_SID
+   连接为：Normal
+
+   system用户登录：
+   用户名：pdbAdmin
+   口令：SysOracle2021
+   数据库：ipaddress:1521/ORACLE_SID
+   连接为：Normal
    ```
 
    下面是`navicat`客户端工具的连接事例
 
    ```
+   普通用户登录(高级中角色选择Default)：
    连接类型：Basic
    主机：ipaddress
    端口：1521
    服务名(选择服务名)：pdbname
    用户名:orcl
    密码:Orcl2021
+
+   sys用户登录(高级中角色选择SYSDBA)：
+   连接类型：Basic
+   主机：ipaddress
+   端口：1521
+   服务名(选择服务名)：ORACLE_SID
+   用户名:sys
+   密码:SysOracle2021
+
+   system用户登录(高级中角色选择Default)：
+   连接类型：Basic
+   主机：ipaddress
+   端口：1521
+   服务名(选择服务名)：ORACLE_SID
+   用户名:sys
+   密码:SysOracle2021
+
+   system用户登录(高级中角色选择Default)：
+   连接类型：Basic
+   主机：ipaddress
+   端口：1521
+   服务名(选择服务名)：pdbname
+   用户名:pdbAdmin
+   密码:SysOracle2021
+   ```
+   问题：sys/system/pdbAdmin用户登录提示：ORA-01017：用户名/口令无效；登录被拒绝
+
+   重置sys/system用户密码
+   ```
+    $ sqlplus / as sysdba
+    alter user sys identified by "SysOracle2021";
+    alter user system identified by "SysOracle2021";
+   ```
+   重置pdbAdmin用户密码
+   ```
+    alter session set container=pdbname;
+    alter user pdbAdmin identified by "SysOracle2021";
    ```
 
 2. 安装前请将Oracle 19C安装包（LINUX.X64_193000_db_home.zip ）放置在 /opt/ 目录下（脚本提示是/opt,实际可随意存放）
