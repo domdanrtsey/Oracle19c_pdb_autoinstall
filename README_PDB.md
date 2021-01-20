@@ -156,10 +156,10 @@
    **ORACLE_HOM路径：**
 
    ```shell
-   ORACLE_HOME=/u01/oracle/product/12c/dbhome_1
+   ORACLE_HOME=/u01/oracle/product/19c/dbhome_1
    脚本执行提示如下:
-   read -p 'Please input the ORACLE_HOME(e.g:/u01/oracle/product/12c/dbhome_1):' S1
-   Please input the ORACLE_HOME(/u01/oracle/product/12c/dbhome_1):
+   read -p 'Please input the ORACLE_HOME(e.g:/u01/oracle/product/19c/dbhome_1):' S1
+   Please input the ORACLE_HOME(/u01/oracle/product/19c/dbhome_1):
    ```
 
    **数据库安装包的存放路径：**
