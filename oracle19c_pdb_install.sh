@@ -1,5 +1,5 @@
 #!/bin/bash
-#script_name: oracle19c_install.sh
+#script_name: oracle19c_pdb_install.sh
 #Author: Danrtsey.Shun
 #Email:mydefiniteaim@126.com
 #auto_install_oracle19c version=12.2.0.3
@@ -20,8 +20,8 @@
 # CharacterSet: ZHS16GBK or AL32UTF8
 # NationalCharacterSet: AL16UTF16 or UTF8
 # 4.执行
-# chmod + oracle19c_install.sh
-# sh -x oracle19c_install.sh
+# chmod + oracle19c_pdb_install.sh
+# sh -x oracle19c_pdb_install.sh
 #
 #################### Steup 2 Install oracle listener & dbca  ####################
 # attentions2:
@@ -216,8 +216,6 @@ fs.aio-max-nr = 1048576
 fs.file-max = 6815744
 EOF
 /sbin/sysctl -p
-else
-    tail -11f /etc/sysctl.conf
 fi
 E=`grep 'oracle' /etc/security/limits.conf`
 if [ ! -n "${E}" ];then
@@ -229,8 +227,6 @@ oracle hard nofile 65536
 oracle soft memlock 4000000
 oracle hard memlock 4000000
 EOF
-else
-    tail -5f /etc/security/limits.conf
 fi
 F=`grep 'ORACLE_SID' /home/${ora_user}/.bash_profile`
 if [ ! -n "${F}" ];then
@@ -241,8 +237,6 @@ export ORACLE_HOME=${ORACLE_HOME}
 export PATH=\$PATH:\$ORACLE_HOME/bin
 export NLS_LANG="AMERICAN_CHINA.ZHS16GBK"
 EOF
-else
-    tail -4f /home/${ora_user}/.bash_profile
 fi
 sed -i "/pam_namespace.so/a\session    required     pam_limits.so" /etc/pam.d/login
 G=`grep 'oracle' /etc/profile`
@@ -257,8 +251,6 @@ if [ \$USER = "oracle" ];then
     fi
 fi
 EOF
-else
-    tail -8f /etc/profile
 fi
 
 ###unzip the install package and set response file
