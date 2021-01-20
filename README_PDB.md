@@ -80,13 +80,14 @@
     用户名:pdbAdmin
     密码:SysOracle2021
    ```
-   问题：sys/system/pdbAdmin用户登录提示：ORA-01017：用户名/口令无效；登录被拒绝
+   问题：sys/system/orcl/pdbAdmin用户登录提示：ORA-01017：用户名/口令无效；登录被拒绝
 
-   重置sys/system用户密码
+   重置sys/system/orcl用户密码
    ```
     $ sqlplus / as sysdba
     alter user sys identified by "SysOracle2021";
     alter user system identified by "SysOracle2021";
+    alter user orcl identified by "Orcl2021";
    ```
    重置pdbAdmin用户密码
    ```
